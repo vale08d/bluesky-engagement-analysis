@@ -9,7 +9,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# ── Configuration ─────────────────────────────────────────────────────────────
+# Configuration 
 topic = "Elon Musk"
 limit = 100
 
@@ -25,7 +25,7 @@ if not all([BLUESKY_HANDLE, BLUESKY_PASSWORD, MONGO_URI]):
         "BLUESKY_PASSWORD, and MONGO_URI. See .env.example for the template."
     )
 
-# ── Step 1: Fetch from Bluesky API ────────────────────────────────────────────
+# Step 1: Fetch from Bluesky API
 client = Client()
 client.login(BLUESKY_HANDLE, BLUESKY_PASSWORD)
 
@@ -63,7 +63,7 @@ print("\n=== BLUESKY DATAFRAME ===")
 print(f"Rows pulled from Bluesky: {len(df)}")
 print(df.head(10))
 
-# ── Step 2: Store in MongoDB ───────────────────────────────────────────────────
+# Step 2: Store in MongoDB 
 mongo_client = MongoClient(MONGO_URI)
 db = mongo_client[DB_NAME]
 collection = db[COLLECTION_NAME]
@@ -76,7 +76,7 @@ collection.delete_many({"topic": topic})
 insert_result = collection.insert_many(docs)
 print(f"\nInserted into MongoDB: {len(insert_result.inserted_ids)} documents")
 
-# ── Step 3: Re-fetch from MongoDB ─────────────────────────────────────────────
+# Step 3: Re-fetch from MongoDB
 mongo_docs = list(collection.find({"topic": topic}, {"_id": 0}))
 df_mongo = pd.DataFrame(mongo_docs)
 
@@ -84,7 +84,7 @@ print("\n=== MONGODB DATAFRAME ===")
 print(f"Rows pulled from MongoDB: {len(df_mongo)}")
 print(df_mongo.head(10))
 
-# ── Step 4: Visualizations ────────────────────────────────────────────────────
+# Step 4: Visualizations
 sns.set_theme(style="whitegrid")
 
 # Chart 1: Engagement Share (%)
