@@ -1,4 +1,4 @@
-# 🦋 Bluesky Engagement Analysis
+# Bluesky Engagement Analysis
 
 > A full-stack data pipeline that pulls live posts from the Bluesky social API, stores them in MongoDB Atlas, and generates engagement visualizations with Python.
 
@@ -10,7 +10,7 @@
 
 ---
 
-## 📌 What This Project Does
+## What This Project Does:
 
 This pipeline performs end-to-end social media data engineering on any search topic:
 
@@ -23,7 +23,7 @@ This pipeline performs end-to-end social media data engineering on any search to
 
 ---
 
-## 📊 Visualizations Generated
+## Visualizations Generated:
 
 | Chart | Type | What It Shows |
 |-------|------|---------------|
@@ -34,7 +34,7 @@ This pipeline performs end-to-end social media data engineering on any search to
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack:
 
 | Tool | Purpose |
 |------|---------|
@@ -47,7 +47,7 @@ This pipeline performs end-to-end social media data engineering on any search to
 
 ---
 
-## ⚙️ Setup
+## Setup:
 
 ### 1. Clone the repository
 ```bash
@@ -60,7 +60,7 @@ cd bluesky-engagement-analysis
 pip install -r requirements.txt
 ```
 
-### 3. Configure credentials (environment variables — do NOT hardcode)
+### 3. Configure credentials (environment variables)
 
 Create a `.env` file in the project root:
 ```
@@ -69,9 +69,6 @@ BLUESKY_PASSWORD=your_app_password
 MONGO_URI=your_mongodb_atlas_connection_string
 ```
 
-> ⚠️ **Never commit credentials to GitHub.** The `.gitignore` file in this repo excludes `.env`.
-> Generate a Bluesky **App Password** at: Settings → Privacy & Security → App Passwords
-
 ### 4. Run the pipeline
 ```bash
 python bluesky.py
@@ -79,7 +76,7 @@ python bluesky.py
 
 ---
 
-## 🔄 How It Works
+## How It Works:
 
 ```
 Bluesky API (atproto)
@@ -102,7 +99,7 @@ Bluesky API (atproto)
 
 ---
 
-## 📁 Project Structure
+## Project Structure:
 
 ```
 bluesky-engagement-analysis/
@@ -115,14 +112,10 @@ bluesky-engagement-analysis/
 
 ---
 
-## 💡 What I Learned
+## What I Learned:
 
 - **API response parsing:** Bluesky's AT Protocol returns deeply nested objects with optional fields — using `getattr()` with fallbacks was essential to avoid crashes on posts with missing metadata.
 - **MongoDB upsert pattern:** Deleting and re-inserting by topic on each run keeps the collection current without accumulating stale records.
 - **Engagement skew:** Social media engagement almost always follows a power-law distribution — a small number of posts capture the majority of interactions. The histogram + KDE chart makes this pattern immediately visible.
 
 ---
-
-## 📸 Sample Output
-
-*(Add screenshots of your 4 charts here)*
